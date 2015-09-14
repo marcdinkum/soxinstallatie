@@ -1,11 +1,14 @@
 #! /bin/bash
 
-# take a snippet from years.wav
-sox years.wav years_intro.wav trim 9.4 4.3
+FILENAME=$1
+BASENAME=`basename $1 .wav`
+
+# take a snippet from ${BASENAME}.wav
+sox $FILENAME ${BASENAME}_intro.wav trim 9.4 4.3
 
 # reverse our snippet
-sox years_intro.wav years_rev.wav reverse
+sox ${BASENAME}_intro.wav ${BASENAME}_rev.wav reverse
 
 # concatenate both fragments
-sox --combine concatenate years_intro.wav years_rev.wav years_mashup.wav
+sox --combine concatenate ${BASENAME}_intro.wav ${BASENAME}_rev.wav ${BASENAME}_mashup.wav
 
